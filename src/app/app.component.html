@@ -1,0 +1,74 @@
+<div class="main">
+  <div class="title-wrapper">
+    <div class="box"></div>
+    <div class="appTitle">
+      <p>To Do App</p>
+    </div>
+  </div>
+  <div class="row-wrapper">
+    <p>Your Board</p>
+    <div class="list-and-add-wrapper">
+      <div class="row" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="lists">
+        <div class="individual-list" *ngFor="let list of lists; let i = index" cdkDrag>
+          <div class="drag-container">
+            <div class="list-head-wrapper">
+              <div class="addList">
+                <p>List {{(list.id * 1) + 1}}</p>
+              </div>
+              <div class="delete-button">
+                <input type="button" value="Delete this list" (click)="deleteList(i)" />
+              </div>
+            </div>
+
+            <div cdkDropList id="{{list.id}}" [cdkDropListData]="list.cards" [cdkDropListConnectedTo]="connectedTo"
+              class="item-list" (cdkDropListDropped)="drop($event)">
+              <div class="item-box" *ngFor="let weekItem of list.cards" (click)="openModal(list.id, weekItem.id)"
+                cdkDrag>
+                <p>{{weekItem.cardTitle}}</p>
+                <p>{{weekItem.cardDescription}}</p>
+              </div>
+            </div>
+            <div class="add-card-button">
+              <p (click)="addNewCard(list.id)">Add new card...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="add-new-list">
+        <p (click)="addNewList()">Add new list...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id={{deleteListIdCardId}} class="modal"
+    (click)="closeModalOutside($event.target.id, cardTitleVal.value, cardDescriptionVal.value)">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="cardTitle">
+          <input id="card-title" type="text" value="Card Title" #cardTitleVal />
+        </div>
+        <div class="description-delete-wrapper">
+          <textarea id="card-description" placeholder="Card description" #cardDescriptionVal></textarea>
+          <input type="button" value="Delete card" class="deleteClass delete-card" id={{deleteListIdCardId}}
+            (click)="deleteCard($event)" />
+          <span class="listValue" style="display: none"></span>
+        </div>
+        <div class="comment">
+          <textarea rows="5" id="commentText"></textarea>
+        </div>
+        <div class="commentBtnWrapper">
+          <input id={{deleteListIdCardId}} class="delete-card" type="button" value="Add Comment"
+            (click)="saveComment($event.target.id)" />
+        </div>
+        <div class="addedComments">
+          <div *ngFor="let comment of commentTextValue">
+            <p>{{comment.comment}}</p>
+            <p>{{comment.date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

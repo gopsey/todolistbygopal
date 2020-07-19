@@ -1,0 +1,20 @@
+1. Used pure javscript for building components and wiring up views
+2. Used Angular CDK for drag and drop functionality
+3. Added animations for drag-drop and modal functionalities for better User Experience
+3. Made card title and description to save when modal popup is closed
+4. Deployed to heroku server for assessment using node.js
+5. Optimized for all screen sizes including mobile, tablet, desktop and large screens
+
+Functionalities implemented:
+    + Adding new List
+    + Reordering lists within boards using drag and drop
+    + Adding new card
+    + Reordering cards within and outside list using drag and drop
+    + Scrolling within list if list height exceeds viewport
+    + Scrolling beyond if list width exceeds viewport
+    + Delete created list
+    + Opening modal popup on card click
+    + Delete created card
+    + Add comments for a card along with date and time
+    + Edit Card title
+    + Edit Card description
